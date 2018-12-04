@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+        <style>
+            body {
+                background-image: url("poz.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                font-family: "Arial", sans-serif;
+            }
+            ul {
+                font-size: 20px;
+                list-style-type: none;
+                margin: 0;
+                padding: 10px;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
+            .mySlides {
+                display:none;
+            }
+            .SlideShow {
+                margin-top: 70px;
+                margin-left: 33%;
+            }
+            .dobrodoslica {
+                text-align: center;
+                margin-top: 100px;
+                font-size: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="novosti.html">Novosti</a></li>
+                <li><a href="video.html">Filmovi & Serije</a></li>
+                <li><a href="glumci.html">Glumci</a></li>
+                <li><a href="komentari.html">Vasi Komentari</a></li>
+                <li style="float:right"><a class="active" href="login.html">Uloguj se</a></li>
+                <li style="float:right"><a href="korisnik.html">Registruj se</a></li>
+            </ul> 
+            <div class="SlideShow" style="max-width:700px">
+                <img class="mySlides" src="http://yesofcorsa.com/wp-content/uploads/2017/03/Lucifer-Series-Wallpaper-Full-HD.jpg" alt="Lucifer" style="width:100%">
+                <img class="mySlides" src="http://hdqwalls.com/wallpapers/hello-friend-mr-robot-ud.jpg" alt="MR. Robot" style="width:100%">
+                <img class="mySlides" src="https://image.tmdb.org/t/p/original/8S1MXXL6YWK67qAhsDSTCoIxbte.jpg" alt="WhoAmI" style="width:100%">
+            </div>
+            
+            <h2 class="dobrodoslica">Sajt koji sadrzi sve o Filmovima & Serijama<br>
+                DOBRO DOSLI!</h2>
+        </div>
+        <script>
+            var myIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) {
+                    myIndex = 1;
+                }
+                x[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 3000); // Change image every 3 seconds
+            }
+        </script>
+    </body>
+</html>

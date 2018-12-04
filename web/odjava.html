@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    </head>
+    <body>
+        <div id="prazno">
+        </div>
+        <script>
+            var app = new Vue({
+               el: "#prazno",
+               data: {
+                   
+               },
+               methods: {
+                   odjava(){
+                       axios.get("http://localhost:8080/ZavrsniRad/app/odjava").then(function(result){
+                           window.location="index.html";
+                       });
+                   }
+               },
+               beforeMount(){
+                   this.odjava();
+                   }
+            });
+        </script>
+    </body>
+</html>

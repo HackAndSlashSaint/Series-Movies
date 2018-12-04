@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+        <link rel="shortcut icon" href="">
+        <style>
+            body {
+                background-image: url("poz.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                font-family: "Arial", sans-serif;
+            }
+            ul {
+                font-size: 20px;
+                list-style-type: none;
+                margin: 0;
+                padding: 10px;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
+            #tabkom{
+                border: 1px solid black;
+                border-collapse: collapse;
+                position: absolute;
+                top: 100px;
+                left:250px;
+                width:  70%;
+            }
+            #tabkom th{
+                font-size: 20px;
+                padding: 5px 5px;
+                background-color: #ddd;
+            }
+            #tabkom td{
+                font-size: 20px;
+                text-align: center;
+                padding: 5px 5px;
+                border: 1px solid black;
+            }
+            #komtekst{
+                float: right;
+                margin-top: 800px;
+            }
+            textarea{
+                border: 1px solid black;
+            }
+            ::-webkit-input-placeholder { 
+                color: black;
+                font-size: 20px;
+            }
+            h1{
+                margin-left: 100px;
+                margin-top: 20px;
+            }
+            #table-trailer {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 20%;
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+            #table-trailer td, #table-trailer th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            #table-trailer tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            #table-trailer tr:hover {
+                background-color: #ddd;
+            }
+            #table-trailer th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #333;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="novosti.html">Novosti</a></li>
+                <li><a href="video.html">Filmovi & Serije</a></li>
+                <li><a href="glumci.html">Glumci</a></li>
+                <li><a href="komentari.html">Vasi Komentari</a></li>
+                <li style="float:right"><a class="active" href="login.html">Uloguj se</a></li>
+                <li style="float:right"><a href="korisnik.html">Registruj se</a></li>
+                <li style="float:right"><a href="odjava.html">Odjavi se</a></li>
+            </ul>
+            <div id="komtekst">
+                <textarea rows="7" cols="100" v-model="komentar.tekst" placeholder="Unesite komentar">
+                        
+                </textarea>
+                <button @click="posalji">Posalji</button>
+            </div>
+            <h1>Uskor Dolazi</h1>
+            <div id="frame">
+                <table id="table-trailer">
+                <thead>
+                    <tr id="naslovi">
+                        <th>Ime</th>
+                        <th>Datum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="t in trailer"><td>{{t.ime}}</td><td>{{t.datum}}</td></tr> 
+                </tbody>
+            </table>
+                </div>
+            </div>
+        </div>
+        <script>
+var app = new Vue({
+el: "#content",
+        data: {
+        komentar: {},
+        trailer: []
+        },
+        methods: {
+            posalji() {
+                   axios.put("app/video", app.komentar).then(function (result) {
+                   });
+               }
+           },
+           created: function () {
+        axios.get("app/trailer").then(function (result) {
+            app.trailer = result.data;
+        });
+    }
+});
+           
+
+        </script>
+    </body>
+</html>

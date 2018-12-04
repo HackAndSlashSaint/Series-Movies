@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+        <style>
+            body {
+                background-image: url("poz.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                font-family: "Arial", sans-serif;
+            }
+            #forma {
+                margin-top: 200px;
+                margin-left: 500px;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+        <table id="forma">
+        <tr><td>Email:</td><td><input type="text" v-model="user.email" style="margin: 5px; height: 30px; width: 300px"/><br></td></tr>
+        <tr><td>Password:</td><td><input type="password" v-model="user.pass" style="margin: 5px; height: 30px; width: 300px"/><br></td></tr>
+        <tr><td></td><td><button @click="logujse" style="margin: 5px; padding: 20px; margin-left:">loguj se</button><br></td></tr>
+        </table>
+             <p style="color:red">{{message}}</p>
+            </div>
+    <script>
+   var app=new Vue({ 
+       el:"#content",
+       data: {
+           user: {},
+           message: ""
+       },
+       methods: {
+          logujse() {
+              axios.post("app/login", app.user).then(function(response){
+                 if(response.data == "OK") {
+                     window.location="index.html";
+                 } else {
+                     app.user={};
+                     app.message ="Email ili password nisu ispravni!";
+                 }
+              });
+          } 
+       }
+   });
+    </script>
+</body>
+</html>

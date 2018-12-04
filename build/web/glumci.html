@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+        <style>
+            body {
+                 background-image: url("poz.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                font-family: "Arial", sans-serif;
+            }
+            ul {
+                font-size: 20px;
+                list-style-type: none;
+                margin: 0;
+                padding: 10px;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
+            #table-glumci {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 70%;
+                margin-top: 50px;
+                margin-left: 200px;
+            }
+            #table-glumci td, #table-glumci th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            #table-glumci tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            #table-glumci tr:hover {
+                background-color: #ddd;
+            }
+            #table-glumci th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #333;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="novosti.html">Novosti</a></li>
+                <li><a href="video.html">Filmovi & Serije</a></li>
+                <li><a href="glumci.html">Glumci</a></li>
+                <li><a href="komentari.html">Vasi Komentari</a></li>
+                <li style="float:right"><a class="active" href="login.html">Uloguj se</a></li>
+                <li style="float:right"><a href="korisnik.html">Registruj se</a></li>
+                <li style="float:right"><a href="odjava.html">Odjavi se</a></li>
+            </ul> 
+            <table id="table-glumci">
+                <thead>
+                    <tr id="naslovi">
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Godina Rodjenja</th>
+                        <th>Drzava</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="g in glumci"><td>{{g.ime}}</td><td>{{g.prezime}}</td><td>{{g.godiste}}</td><td>{{g.drzava}}</td></tr> 
+                </tbody>
+            </table>
+        </div>
+        <script>
+var app=new Vue({
+    el: "#content",
+    data: {
+        glumci: []
+    },
+    created: function () {
+        axios.get("app/glumci").then(function (result) {
+            app.glumci = result.data;
+        });
+    }
+});
+        </script>
+    </body>
+</html>

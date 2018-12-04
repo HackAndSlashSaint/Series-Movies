@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+        <style>
+            body {
+                 background-image: url("poz.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                font-family: "Arial", sans-serif; 
+            }
+            ul {
+                font-size: 20px;
+                list-style-type: none;
+                margin: 0;
+                padding: 10px;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
+            #tabkom{
+                border: 1px solid black;
+                border-collapse: collapse;
+                position: absolute;
+                top: 100px;
+                left:250px;
+                width:  70%;
+            }
+            #tabkom th{
+                font-size: 20px;
+                padding: 5px 5px;
+                background-color: #333;
+                color: white;
+            }
+            #tabkom td{
+                font-size: 20px;
+                text-align: center;
+                padding: 5px 5px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+       <div id="content">
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="novosti.html">Novosti</a></li>
+                <li><a href="video.html">Filmovi & Serije</a></li>
+                <li><a href="glumci.html">Glumci</a></li>
+                <li><a href="komentari.html">Vasi Komentari</a></li>
+                <li style="float:right"><a class="active" href="login.html">Uloguj se</a></li>
+                <li style="float:right"><a href="korisnik.html">Registruj se</a></li>
+                <li style="float:right"><a href="odjava.html">Odjavi se</a></li>
+            </ul> 
+           <div>
+                <table id="tabkom">
+                    <tr><th>Ime</th><th>Prezime</th><th>Email</th><th>Datum</th><th>Komentar</th></tr> 
+                    <tr v-for="k in komentari">
+                        <td>{{k.ime}}</td>
+                        <td>{{k.prezime}}</td>
+                        <td>{{k.email}}</td>
+                        <td>{{k.datum}}</td>
+                        <td>{{k.tekst}}</td>
+                    </tr>
+                </table>
+            </div>
+       </div>
+        <script>
+            var app = new Vue ({
+               el: "#content",
+               data: {
+                   komentari: []
+               },
+               methods: {
+                   prikazi() {
+                       axios.get("app/komentar").then(function (result){
+                           app.komentari = result.data;
+                       });
+                   }
+               },
+               beforeMount() {
+                   this.prikazi();
+               }
+            });
+            </script>
+    </body>
+</html>
